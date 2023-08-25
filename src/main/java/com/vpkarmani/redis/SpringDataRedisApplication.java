@@ -1,5 +1,7 @@
 package com.vpkarmani.redis;
 
+import java.util.concurrent.TimeUnit;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -63,6 +65,29 @@ public class SpringDataRedisApplication implements CommandLineRunner {
 		System.out.println("--------------------------------");
 		System.out.println(personRepository.findById("p1"));
 
+		loopGetAccount();
+		
 		System.exit(0);
 	}
+	
+	private void loopGetAccount() {
+        
+	    System.out.println();
+	    System.out.println("loop for Account with findById('id1'):");
+        System.out.println("--------------------------------");
+        
+        while(true) {
+            
+            accountRepository.save(new Account("id1", "123456", Account.Type.SAVINGS, Double.valueOf(100)));
+            
+            System.out.println(accountRepository.findById("id1"));
+            try {
+                TimeUnit.SECONDS.sleep(30);
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+        
+    }
 }

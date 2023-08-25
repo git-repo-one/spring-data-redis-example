@@ -8,7 +8,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-@RedisHash(value =  "person", timeToLive = 120)
+@RedisHash(value =  "person", timeToLive = 120) // Long.parseLong("#{@environment.getProperty('prop.name')}")
 public class Person {
 
 	@Id
